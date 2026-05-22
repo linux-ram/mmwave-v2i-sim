@@ -1,0 +1,25 @@
+city:
+  name: synthetic_grid
+  preset: boston_seaport
+  length_m: 1200
+  width_m: 800
+
+radio:
+  enabled_bands_ghz: [28.0, 39.0]
+  bandwidth_hz: 400000000
+
+scale:
+  max_vehicles: 200
+  max_base_stations: 20
+
+mobility:
+  mode: synthetic
+  synthetic_style: lane_grid
+
+run:
+  seed: 12345
+  steps: 30
+  scheduler_strategy: max_cqi
+
+matlab:
+  engine: legacy_research

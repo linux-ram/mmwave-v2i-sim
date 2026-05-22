@@ -1,0 +1,32 @@
+city:
+  name: synthetic_grid
+  preset: boston_seaport
+  length_m: 2000
+  width_m: 1500
+
+radio:
+  enabled_bands_ghz: [28.0, 39.0]
+  bandwidth_hz: 400000000
+
+scale:
+  max_vehicles: 200
+  max_base_stations: 20
+
+mobility:
+  mode: synthetic
+  synthetic_style: lane_grid
+  route_source: null
+  speed_mps_mean: 11.0
+  speed_mps_std: 2.5
+
+run:
+  seed: 12345
+  steps: 100
+  timestep_s: 0.1
+  scheduler_strategy: max_cqi
+  scheduler_objective: throughput
+
+render:
+  quality: balanced
+  max_draw_vehicles: 80
+  max_route_points: 120
