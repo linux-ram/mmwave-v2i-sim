@@ -1,0 +1,19 @@
+# sim_engine headless/GUI preset — Boston Seaport routes when osmnx is installed.
+# Without osmnx, falls back to bundled vehicularRoutes.mat (50 paths).
+matlab:
+  engine: sim_engine
+  n_vehicle: 10
+  seed: 12345
+  num_trials: 5
+
+mobility:
+  mode: route_file
+
+render:
+  quality: high
+  max_draw_vehicles: 50
+  max_route_points: 500
+
+run:
+  seed: 12345
+  steps: 119

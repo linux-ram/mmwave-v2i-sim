@@ -132,12 +132,30 @@ python -m mmwave_v2i_sim.cli --batch
 
 Sweeps `nVehicle ∈ {1, 2, 5, 10, 50}` across 5 trials and reports mean/std trim loss.
 
+## Scale limits (v0.1)
+
+| Mode | Max vehicles | Config / entry |
+|------|--------------|----------------|
+| GUI (interactive) | 50 | Vehicle buttons in playback panel |
+| Headless `sim_engine` | 50 (bundled routes; cycles with stagger) | `configs/scenario_default.yaml` |
+| Headless legacy research | 200 | `configs/scenario_scale_200.yaml` |
+
+Benchmark headless throughput:
+
+```bash
+python scripts/bench_scale.py
+```
+
+Regression gate: `tests/test_scale.py` (200-vehicle profile, 30 steps under 30 s).
+
 ## Scenarios
 
 | File | Description |
 |------|-------------|
 | `configs/scenario_default.yaml` | Default sim engine (10 vehicles, Guillotine) |
+| `configs/scenario_boston_osm.yaml` | Same as default; prefers OSM Boston routes when `osmnx` installed |
 | `configs/scenario_legacy_research.yaml` | Research engine (200 vehicles, multi-BS, synthetic routes) |
+| `configs/scenario_scale_200.yaml` | Legacy 200-vehicle / 20-BS headless profile |
 
 ## Package structure
 

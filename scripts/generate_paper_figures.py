@@ -17,17 +17,25 @@ def main() -> None:
         raise SystemExit("Run: python scripts/generate_validation_report.py")
 
     data = json.loads(report_path.read_text(encoding="utf-8"))
-    rows = data["comparison"]
+    primary = data.get("sim_engine") or data
+    rows = primary["comparison"]
     x = [r["vehicles"] for r in rows]
-    y_py = [r["trim_loss_python"] for r in rows]
-    y_ref = [r["trim_loss_matlab_ref"] for r in rows]
+    y_py = [r.get("trim_loss_mean", r.get("trim_loss_python")) for r in rows]
+    legacy = data.get("legacy", {})
+    legacy_rows = legacy.get("comparison", [])
+    y_ref = (
+        [r["trim_loss_matlab_proxy"] for r in legacy_rows]
+        if legacy_rows
+        else None
+    )
 
     out_dir = Path("paper/figures")
     out_dir.mkdir(parents=True, exist_ok=True)
 
     fig, ax = plt.subplots(figsize=(6, 4))
-    ax.plot(x, y_py, "r-o", label="Python simulator")
-    ax.plot(x, y_ref, "k--s", label="MATLAB-adjacent reference")
+    ax.plot(x, y_py, "r-o", label="Python simulator (sim_engine)")
+    if y_ref is not None:
+        ax.plot(x, y_ref, "k--s", label="MATLAB-adjacent reference (legacy proxy)")
     ax.set_xscale("log")
     ax.set_xlabel("Vehicle count")
     ax.set_ylabel("Trim loss")

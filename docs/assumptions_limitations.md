@@ -14,8 +14,8 @@
 - Synthetic lane-grid mobility and multi-BS channel abstraction remain available for experiments
 - Scheduler strategies (`max_cqi`, `proportional_fair`, `latency_aware`) are not part of the original MATLAB simulator
 
-## Out of scope
+## Out of scope (v0.1)
 
-- 3GPP TR 38.901 as default channel model
-- OSM city presets as default geometry
-- Photorealistic 3D rendering
+- **3GPP TR 38.901** full channel implementation (UMi/UMa profiles, cluster delays, etc.). Legacy `channel/` uses a simplified geometric LOS/NLOS and dual-band path-loss abstraction; `sim_engine` uses route-based LoS probability only.
+- San Francisco and RTP **3D city meshes** as default geometry (presets exist for legacy synthetic grids only).
+- Photorealistic 3D rendering and interactive 200-vehicle GUI (see GitHub issues #1–#2).
