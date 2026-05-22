@@ -41,34 +41,32 @@ The simulator is organized into deterministic core modules:
 
 \section{Modeling Assumptions}
 Channel behavior uses simplified 3GPP-inspired path loss and geometric blockage.
-Scheduler/packing uses in-process Python algorithms rather than the original C++ rectangle-bin executable.
-Validation compares density-sweep trim-loss trends against MATLAB-adjacent reference curves with documented caveats.
+Scheduler/packing uses in-process Python algorithms (Guillotine, Shelf, MaxRects) rather than the original C++ rectangle-bin executable.
+Validation and density-sweep statistics are reproducible from fixed seeds with documented caveats.
 
-\section{Experiments}
-We sweep vehicle counts $\{1,2,5,10,50\}$ and report mean trim loss and utilization.
-Figure~\ref{fig:sweep} shows Python results against qualitative MATLAB-adjacent references.
+\section{Interactive Visualization}
+The desktop application reproduces the original two-panel layout.
+Figure~\ref{fig:map} shows the aerial map with vehicular routes, line-of-sight beams, and per-vehicle status coloring.
+Figure~\ref{fig:pack} shows the normalized resource-block packing view with trim-loss summary for the current timestep.
 
-\begin{figure}[t]
+\begin{figure}[!t]
   \centering
-  \includegraphics[width=\linewidth]{figures/fig_density_sweep.pdf}
-  \caption{Vehicle-density sweep: trim loss comparison.}
-  \label{fig:sweep}
+  \includegraphics[width=\linewidth]{figures/fig_gui_map.png}
+  \caption{Figure~1 style view: aerial map, active routes, LoS beams, and vehicle packing status.}
+  \label{fig:map}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[!t]
   \centering
-  \includegraphics[width=0.48\linewidth]{figures/fig_city_presets.pdf}
-  \hfill
-  \includegraphics[width=0.48\linewidth]{figures/fig_dual_band.pdf}
-  \caption{Left: open-license city preset extents. Right: mean dual-band SINR (28/39 GHz) across presets.}
-  \label{fig:city_band}
+  \includegraphics[width=\linewidth]{figures/fig_gui_packing.png}
+  \caption{Figure~2 style view: 2DRBP packing of resource service blocks and trim-loss readout.}
+  \label{fig:pack}
 \end{figure}
 
 \section{Reproducibility}
-Artifacts are generated via:
-\texttt{python scripts/generate\_validation\_report.py} and
+Artifacts are generated via \texttt{python scripts/generate\_readme\_assets.py} and
 \texttt{bash scripts/build\_paper.sh}.
-Fixed seeds yield deterministic JSON outputs.
+Fixed seeds yield deterministic simulation outputs and session export bundles.
 
 \section{Conclusion}
 The Python simulator provides a research-grade, extensible foundation for mmWave V2I link-layer experimentation without MATLAB licensing constraints.

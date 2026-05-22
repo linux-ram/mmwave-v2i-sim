@@ -21,12 +21,12 @@ From the repository root:
 bash scripts/build_paper.sh
 ```
 
-This runs validation, regenerates figures, then compiles `paper/main.tex` with **Tectonic** if available, otherwise **pdfLaTeX**.
+This regenerates GUI preview figures for the paper, then compiles `paper/main.tex` with **Tectonic** if available, otherwise **pdfLaTeX**.
 
 ## Figures only
 
 ```bash
-python scripts/generate_validation_report.py
+python scripts/generate_readme_assets.py
 python scripts/generate_paper_figures.py
 ```
 
@@ -34,9 +34,8 @@ python scripts/generate_paper_figures.py
 
 | Path | Description |
 |------|-------------|
-| `paper/figures/fig_density_sweep.pdf` | Trim-loss density sweep |
-| `paper/figures/fig_city_presets.pdf` | City preset extents |
-| `paper/figures/fig_dual_band.pdf` | Dual-band SINR comparison |
+| `paper/figures/fig_gui_map.png` | Figure 1 style map preview |
+| `paper/figures/fig_gui_packing.png` | Figure 2 style packing preview |
 | `paper/main.pdf` | IEEE-style technical report (committed for citation) |
 
 ## CI

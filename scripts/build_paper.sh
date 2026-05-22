@@ -5,6 +5,7 @@ source .venv/bin/activate 2>/dev/null || true
 export MPLCONFIGDIR="${MPLCONFIGDIR:-$(pwd)/.matplotlib_cache}"
 mkdir -p "$MPLCONFIGDIR"
 python scripts/generate_validation_report.py
+python scripts/generate_readme_assets.py
 python scripts/generate_paper_figures.py
 cd paper
 if command -v tectonic >/dev/null 2>&1; then

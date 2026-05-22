@@ -5,12 +5,11 @@
 **Cross-platform mmWave V2I link-layer simulator** — Python port of the MATLAB [mmWave-V2I-2DRBP](https://github.com/linux-ram/mmWave-V2I-2DRBP) workflow with an interactive desktop GUI, 2DRBP packing, and reproducible research artifacts.
 
 <p align="center">
-  <img src="docs/images/hero_aerial.png" alt="Aerial city map (Figure 1 style)" width="720"/>
+  <img src="docs/images/preview_map.png" alt="Simulation map with vehicles, beams, and routes" width="920"/>
 </p>
 
 <p align="center">
-  <img src="docs/images/preview_map.png" alt="Simulation map with vehicles and beams" width="48%"/>
-  <img src="docs/images/preview_packing.png" alt="Resource block packing panel" width="48%"/>
+  <img src="docs/images/preview_packing.png" alt="Resource block packing panel with trim-loss summary" width="920"/>
 </p>
 
 ## Why use this repo
@@ -39,21 +38,6 @@ Headless density sweep (Figure 3 style):
 
 ```bash
 python -m mmwave_v2i_sim.cli --batch
-```
-
-## Screenshots and figures
-
-| | |
-|---|---|
-| Density sweep | ![Trim loss vs vehicle count](docs/images/density_sweep.png) |
-| City presets | ![Boston, SFO, RTP presets](docs/images/city_presets.png) |
-
-Regenerate preview images:
-
-```bash
-python scripts/generate_validation_report.py
-python scripts/generate_paper_figures.py
-python scripts/generate_readme_assets.py
 ```
 
 ## Run modes

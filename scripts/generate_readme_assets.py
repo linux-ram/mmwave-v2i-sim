@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import shutil
 from pathlib import Path
 
 import matplotlib
@@ -16,8 +15,6 @@ from mmwave_v2i_sim.sim_engine.visualize import draw_figure1_map, draw_figure2_p
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs" / "images"
-ASSETS = ROOT / "assets"
-PAPER_FIG = ROOT / "paper" / "figures" / "fig_density_sweep.png"
 
 
 def _save_sim_previews() -> None:
@@ -79,19 +76,10 @@ def _save_city_preset_figure() -> None:
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
-    aerial = ASSETS / "CitySectionAerialView.png"
-    if aerial.is_file():
-        shutil.copy2(aerial, OUT / "hero_aerial.png")
-        print(f"Copied {OUT / 'hero_aerial.png'}")
     _save_sim_previews()
     print(f"Wrote {OUT / 'preview_map.png'} and preview_packing.png")
     _save_city_preset_figure()
     print(f"Wrote {OUT / 'city_presets.png'}")
-    if PAPER_FIG.is_file():
-        shutil.copy2(PAPER_FIG, OUT / "density_sweep.png")
-        print(f"Copied density_sweep.png")
-    else:
-        print("Run: python scripts/generate_paper_figures.py first for density_sweep.png")
 
 
 if __name__ == "__main__":
