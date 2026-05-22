@@ -1,0 +1,23 @@
+# Research-path demo: RTP campus synthetic mobility + dual-band channel.
+city:
+  name: Research Triangle Park
+  preset: rtp_campus
+
+radio:
+  enabled_bands_ghz: [28.0, 39.0]
+  beam_mode: ideal
+
+scale:
+  max_vehicles: 30
+  max_base_stations: 4
+
+mobility:
+  mode: synthetic
+
+run:
+  seed: 1003
+  steps: 25
+  scheduler_strategy: proportional_fair
+
+matlab:
+  engine: legacy_research

@@ -55,6 +55,15 @@ Figure~\ref{fig:sweep} shows Python results against qualitative MATLAB-adjacent 
   \label{fig:sweep}
 \end{figure}
 
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.48\linewidth]{figures/fig_city_presets.pdf}
+  \hfill
+  \includegraphics[width=0.48\linewidth]{figures/fig_dual_band.pdf}
+  \caption{Left: open-license city preset extents. Right: mean dual-band SINR (28/39 GHz) across presets.}
+  \label{fig:city_band}
+\end{figure}
+
 \section{Reproducibility}
 Artifacts are generated via:
 \texttt{python scripts/generate\_validation\_report.py} and
@@ -63,7 +72,7 @@ Fixed seeds yield deterministic JSON outputs.
 
 \section{Conclusion}
 The Python simulator provides a research-grade, extensible foundation for mmWave V2I link-layer experimentation without MATLAB licensing constraints.
-Future work includes open-license 3D city meshes and full 3GPP TR~38.901 channel implementations.
+The desktop release pairs MATLAB-style 2D visualization with ZIP session export; city presets and dual-band abstractions support comparative studies documented in the repository.
 
 \section*{Acknowledgment}
 This Python port is inspired by the original mmWave V2I MATLAB simulator (MathWorks File Exchange 84948).

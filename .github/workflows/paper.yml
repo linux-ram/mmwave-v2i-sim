@@ -1,0 +1,27 @@
+name: Paper PDF
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "paper/**"
+      - "scripts/build_paper.sh"
+      - "scripts/generate_paper_figures.py"
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install TeX Live
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends texlive-latex-extra texlive-fonts-recommended
+      - run: pip install -r requirements-lock.txt && pip install -e ".[dev]"
+      - run: bash scripts/build_paper.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paper-pdf
+          path: paper/main.pdf

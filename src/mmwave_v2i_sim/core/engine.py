@@ -109,7 +109,7 @@ class SimulationEngine:
 
         for step in range(steps):
             step_states = self._mobility.states_at_step(step)
-            channel_snapshots = self._channel.evaluate_step(step_states)
+            channel_snapshots = self._channel.evaluate_step(step_states, step=step)
             per_step_vehicle_counts.append(len(step_states))
             if step_states:
                 per_step_mean_speeds.append(float(np.mean([s.speed_mps for s in step_states])))

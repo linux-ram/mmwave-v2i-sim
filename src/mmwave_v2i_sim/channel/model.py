@@ -7,6 +7,7 @@ import math
 
 import numpy as np
 
+from mmwave_v2i_sim.channel.beam_modes import adjust_sinr_db
 from mmwave_v2i_sim.config.schema import ScenarioConfig
 from mmwave_v2i_sim.mobility.base import VehicleState
 
@@ -95,7 +96,9 @@ class SimpleChannelModel:
         link_bonus = 6.0 if is_los else -4.0
         return rx_margin + link_bonus
 
-    def evaluate_step(self, states: list[VehicleState]) -> list[ChannelSnapshot]:
+    def evaluate_step(
+        self, states: list[VehicleState], *, step: int = 0
+    ) -> list[ChannelSnapshot]:
         snapshots: list[ChannelSnapshot] = []
         if not states:
             return snapshots
@@ -111,10 +114,17 @@ class SimpleChannelModel:
 
             pathloss_by_band: dict[float, float] = {}
             sinr_by_band: dict[float, float] = {}
+            beam_mode = self._config.radio.beam_mode
             for band in self._config.radio.enabled_bands_ghz:
                 pl = self._pathloss_db(distance, band, los)
                 pathloss_by_band[band] = pl
-                sinr_by_band[band] = self._sinr_db(pl, los)
+                base_sinr = self._sinr_db(pl, los)
+                sinr_by_band[band] = adjust_sinr_db(
+                    base_sinr,
+                    mode=beam_mode,
+                    vehicle_id=vehicle.vehicle_id,
+                    step=step,
+                )
 
             snapshots.append(
                 ChannelSnapshot(

@@ -10,4 +10,5 @@ build/
 artifacts/
 !artifacts/validation/
 !artifacts/validation/**
+!artifacts/city_preset_summary.json
 .matplotlib_cache/

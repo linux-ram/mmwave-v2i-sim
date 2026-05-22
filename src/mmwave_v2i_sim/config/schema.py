@@ -19,6 +19,10 @@ class CityConfig(BaseModel):
 class RadioBandConfig(BaseModel):
     enabled_bands_ghz: list[float] = Field(default_factory=lambda: [28.0, 39.0])
     bandwidth_hz: float = Field(default=400e6, gt=0)
+    beam_mode: str = Field(
+        default="codebook",
+        description="codebook (training overhead / misalignment) or ideal (upper bound)",
+    )
 
 
 class ScaleConfig(BaseModel):

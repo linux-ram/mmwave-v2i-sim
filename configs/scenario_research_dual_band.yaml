@@ -1,0 +1,23 @@
+# Dual-band 28/39 GHz with geometric 3D LOS and beam mode comparison.
+city:
+  preset: boston_seaport
+  length_m: 1200
+  width_m: 800
+
+radio:
+  enabled_bands_ghz: [28.0, 39.0]
+  beam_mode: codebook
+
+scale:
+  max_vehicles: 20
+  max_base_stations: 3
+
+mobility:
+  mode: synthetic
+
+run:
+  seed: 4242
+  steps: 20
+
+matlab:
+  engine: legacy_research

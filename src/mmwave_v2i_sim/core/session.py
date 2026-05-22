@@ -64,7 +64,7 @@ class SimulationSession:
         scheduler = self.engine._scheduler
 
         states = mobility.states_at_step(step)
-        snapshots = channel_model.evaluate_step(states)
+        snapshots = channel_model.evaluate_step(states, step=step)
         for v in states:
             hist = self.route_history.setdefault(v.vehicle_id, [])
             hist.append((v.x_m, v.y_m))

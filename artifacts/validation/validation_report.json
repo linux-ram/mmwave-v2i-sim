@@ -14,19 +14,19 @@
     },
     "comparison": [
       {
-        "delta_vs_proxy": 0.6368888888888888,
+        "delta_vs_proxy": 0.6244444444444445,
         "los_ratio": 0.6666666666666666,
         "trim_loss_matlab_proxy": 0.152,
-        "trim_loss_python": 0.7888888888888889,
-        "utilization": 0.2111111111111111,
+        "trim_loss_python": 0.7764444444444445,
+        "utilization": 0.22355555555555554,
         "vehicles": 1
       },
       {
-        "delta_vs_proxy": 0.3633333333333333,
+        "delta_vs_proxy": 0.3202222222222223,
         "los_ratio": 1.0,
         "trim_loss_matlab_proxy": 0.166,
-        "trim_loss_python": 0.5293333333333333,
-        "utilization": 0.4706666666666666,
+        "trim_loss_python": 0.4862222222222223,
+        "utilization": 0.5137777777777778,
         "vehicles": 2
       },
       {
@@ -38,19 +38,19 @@
         "vehicles": 5
       },
       {
-        "delta_vs_proxy": -0.11733333333333332,
+        "delta_vs_proxy": -0.11999999999999998,
         "los_ratio": 0.8000000000000002,
         "trim_loss_matlab_proxy": 0.206,
-        "trim_loss_python": 0.08866666666666667,
-        "utilization": 0.9113333333333333,
+        "trim_loss_python": 0.08600000000000001,
+        "utilization": 0.9140000000000001,
         "vehicles": 10
       },
       {
-        "delta_vs_proxy": -0.25333333333333335,
+        "delta_vs_proxy": -0.2293333333333334,
         "los_ratio": 0.7577777777777778,
         "trim_loss_matlab_proxy": 0.29800000000000004,
-        "trim_loss_python": 0.04466666666666668,
-        "utilization": 0.9553333333333335,
+        "trim_loss_python": 0.06866666666666667,
+        "utilization": 0.9313333333333335,
         "vehicles": 50
       }
     ],
