@@ -15,7 +15,7 @@ Open-source technical report and software (not a peer-reviewed conference/journa
 - **Name:** mmwave-v2i-sim  
 - **URL:** https://github.com/linux-ram/mmwave-v2i-sim  
 - **PDF:** [paper/main.pdf](../paper/main.pdf)  
-- **Version:** v0.2.0 (tag `v0.2.0` when released)
+- **Version:** v0.2.1 (tag `v0.2.1`)
 
 ## BibTeX — technical report (recommended)
 
@@ -26,7 +26,7 @@ Open-source technical report and software (not a peer-reviewed conference/journa
   year         = {2026},
   howpublished = {Open-source software and technical report},
   url          = {https://github.com/linux-ram/mmwave-v2i-sim},
-  note         = {Release v0.2.0. Source code, validation artifacts, and reproducible figures.}
+  note         = {Release v0.2.1. Source code, validation artifacts, and reproducible figures.}
 }
 ```
 
@@ -38,7 +38,7 @@ Open-source technical report and software (not a peer-reviewed conference/journa
   author    = {Subramanian, Ramanathan},
   year      = {2026},
   url       = {https://github.com/linux-ram/mmwave-v2i-sim},
-  version   = {0.2.0},
+  version   = {0.2.1},
   license   = {MIT}
 }
 ```
@@ -58,7 +58,7 @@ Open-source technical report and software (not a peer-reviewed conference/journa
 
 ## In-text examples (APA-style)
 
-> Subramanian (2026) released an open-source mmWave vehicle-to-infrastructure link-layer simulator (mmwave-v2i-sim, v0.2.0).
+> Subramanian (2026) released an open-source mmWave vehicle-to-infrastructure link-layer simulator (mmwave-v2i-sim, v0.2.1).
 
 > We extend the 2DRBP packing workflow of the mmWave V2I simulator (Subramanian, 2026; see also Subramanian, 2019).
 
