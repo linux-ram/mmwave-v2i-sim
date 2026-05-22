@@ -162,6 +162,6 @@ Regression gate: `tests/test_scale.py` (200-vehicle profile, 30 steps under 30 s
 All simulation logic lives in `src/mmwave_v2i_sim/sim_engine/`. The old `matlab_port` package
 is a deprecated compatibility shim that re-exports from `sim_engine`.
 
-## Citation
+## How to cite this work
 
-If this simulator helps your research, cite the original MATLAB work and this Python port. See `paper/main.tex`.
+See **[docs/CITATION.md](CITATION.md)** for the recommended paper title, BibTeX (`@misc` and `@software`), and APA-style examples. The technical report PDF is **[paper/main.pdf](../paper/main.pdf)**. You may also cite the original MATLAB File Exchange entry [84948](https://www.mathworks.com/matlabcentral/fileexchange/84948).

@@ -81,7 +81,14 @@ python scripts/generate_readme_assets.py
 
 ## Citation
 
-[CITATION.cff](CITATION.cff) · MathWorks File Exchange [84948](https://www.mathworks.com/matlabcentral/fileexchange/84948)
+If this simulator supports your work, please cite the **technical report title** and the **software repository**:
+
+**Paper title:** *A Modular Python Simulator for mmWave Vehicle-to-Infrastructure Link-Layer Research*  
+**Software:** [linux-ram/mmwave-v2i-sim](https://github.com/linux-ram/mmwave-v2i-sim) · **PDF:** [paper/main.pdf](paper/main.pdf)
+
+- [BibTeX and APA examples](docs/CITATION.md) (copy-paste `@misc` / `@software` entries)
+- [CITATION.cff](CITATION.cff) for GitHub “Cite this repository”
+- Original MATLAB simulator: File Exchange [84948](https://www.mathworks.com/matlabcentral/fileexchange/84948)
 
 ## License
 

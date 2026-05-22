@@ -2,6 +2,7 @@ cff-version: 1.2.0
 title: mmwave-v2i-sim
 message: >-
   If you use this software, please cite it using the metadata from this file.
+  See docs/CITATION.md for BibTeX examples.
 type: software
 authors:
   - family-names: Subramanian
@@ -9,13 +10,24 @@ authors:
 repository-code: https://github.com/linux-ram/mmwave-v2i-sim
 url: https://github.com/linux-ram/mmwave-v2i-sim
 license: MIT
-version: 0.1.0
+version: 0.2.0
+date-released: 2026-05-22
 keywords:
   - mmwave
   - v2i
   - 2drbp
   - link-layer
   - simulator
+  - python
+preferred-citation:
+  type: article
+  title: A Modular Python Simulator for mmWave Vehicle-to-Infrastructure Link-Layer Research
+  authors:
+    - family-names: Subramanian
+      given-names: Ram
+  year: 2026
+  url: https://github.com/linux-ram/mmwave-v2i-sim
+  notes: Open-source technical report and software; not peer-reviewed.
 references:
   - type: software
     title: Link Layer Simulator for mmWave V2I Network (MATLAB)
