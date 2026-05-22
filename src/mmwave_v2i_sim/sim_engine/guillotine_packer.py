@@ -31,12 +31,25 @@ class _Rect:
 
 
 def determine_packing(rb: tuple[int, int], items: list[tuple[int, int]]) -> PackingResult:
-    if _VENDOR_BIN.is_file():
+    if _VENDOR_BIN.is_file() and _vendor_bin_runnable():
         try:
             return _determine_packing_native(rb, items)
         except (OSError, subprocess.SubprocessError, ValueError):
             pass
     return _determine_packing_python(rb, items)
+
+
+def _vendor_bin_runnable() -> bool:
+    """Skip macOS-only binaries when running on Linux CI or other hosts."""
+    try:
+        proc = subprocess.run(
+            [str(_VENDOR_BIN), "1", "1", "1", "1"],
+            capture_output=True,
+            timeout=2,
+        )
+        return proc.returncode == 0 or bool(proc.stdout.strip())
+    except (OSError, subprocess.SubprocessError):
+        return False
 
 
 def _determine_packing_native(rb: tuple[int, int], items: list[tuple[int, int]]) -> PackingResult:

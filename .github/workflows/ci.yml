@@ -12,6 +12,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Build Guillotine parity binary (Linux)
+        run: |
+          c++ -std=c++17 -O2 vendor/RectangleBinPack/2drbp_parity.cpp \
+            vendor/RectangleBinPack/GuillotineBinPack.cpp vendor/RectangleBinPack/Rect.cpp \
+            -o vendor/RectangleBinPack/2drbp_parity
       - run: pip install -r requirements-lock.txt
       - run: pip install -e ".[dev]"
       - run: pytest -q
