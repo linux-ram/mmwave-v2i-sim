@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/linux-ram/mmwave-v2i-sim/actions/workflows/ci.yml/badge.svg)](https://github.com/linux-ram/mmwave-v2i-sim/actions/workflows/ci.yml)
 
-**Cross-platform mmWave V2I link-layer simulator** — Python port of the MATLAB [mmWave-V2I-2DRBP](https://github.com/linux-ram/mmWave-V2I-2DRBP) workflow with an interactive desktop GUI, 2DRBP packing, and reproducible research artifacts.
+**mmWave V2I link-layer simulator in Python**
 
 <p align="center">
   <img src="docs/images/preview_map.png" alt="Simulation map with vehicles, beams, and routes" width="920"/>

@@ -6,74 +6,104 @@
 
 \title{A Modular Python Simulator for mmWave Vehicle-to-Infrastructure Link-Layer Research}
 
-\author{\IEEEauthorblockN{mmWave V2I Simulator Contributors}
-\IEEEauthorblockA{Open-source research simulator}}
+\author{\IEEEauthorblockN{Ramanathan Subramanian}
+\IEEEauthorblockA{subramanian.r@northeastern.edu}}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-We present an open-source Python simulator for mmWave vehicle-to-infrastructure (V2I) link-layer studies.
-The tool replaces a prior MATLAB workflow with a modular, reproducible architecture supporting
-synthetic and map-matched mobility, dual-band channel abstraction, runtime-selectable scheduling strategies,
-and an interactive desktop GUI inspired by the original \texttt{vehicleBinPackSimulation.m} visualization.
-The simulator targets researchers and practitioners who require license-free execution across macOS, Windows, and Linux.
+We present an open-source simulator for millimeter-wave vehicle-to-infrastructure (V2I) link-layer research.
+The tool integrates map-matched mobility, geometric line-of-sight channel abstraction, runtime-selectable scheduling,
+and two-dimensional resource-block packing (2DRBP) in a single self-contained desktop application.
+A deterministic \texttt{sim\_engine} drives per-timestep snapshots for headless batch studies and interactive playback,
+while a parallel research path exposes YAML-configured city presets, dual-band (28/39\,GHz) radio models, and pluggable schedulers.
+Session exports bundle JSON manifests, CSV trim-loss traces, and an embedded NumPy workspace for offline analysis.
+The design targets reproducible experimentation without external licensed runtimes or opaque native packing binaries.
 \end{abstract}
 
 \begin{IEEEkeywords}
-mmWave, V2I, link-layer simulation, resource allocation, reproducible research
+mmWave, V2I, link-layer simulation, 2DRBP, resource allocation, reproducible research
 \end{IEEEkeywords}
 
 \section{Introduction}
-Millimeter-wave V2I systems require joint evaluation of mobility, blockage, beam alignment, and time-frequency resource allocation.
-Prior MATLAB implementations demonstrated bin-packing-based allocation in urban vehicular scenarios but depend on licensed tooling and external executables.
+Millimeter-wave V2I systems couple urban mobility, directional beams, blockage, and time--frequency resource allocation.
+Link-layer studies require an end-to-end loop: vehicle positions and routes, beam and LoS state, service-block demand,
+packing into a normalized resource grid, and metrics such as trim loss and utilization over many timesteps.
+Few open tools expose this loop with both an interactive map view and machine-readable session artifacts.
 
-This work provides a Python port with plugin interfaces for mobility, channel, scheduling, and visualization modules.
+This simulator closes that gap with a modular Python architecture, a PySide6 desktop GUI, and documented validation sweeps.
+The default path (\texttt{sim\_engine}) emphasizes reproducible 2DRBP experiments; an extended \texttt{core}/\texttt{channel}/\texttt{mobility} stack supports comparative studies with city-scale presets and alternative schedulers.
 
-\section{Architecture}
-The simulator is organized into deterministic core modules:
+\subsection{Contributions}
+The release provides:
 \begin{itemize}
-  \item \textbf{Mobility}: synthetic lane-grid and CSV map-matched routes with city presets.
-  \item \textbf{Channel}: geometric LOS/NLOS and dual-band (28/39 GHz) path-loss abstraction.
-  \item \textbf{Scheduling}: pluggable strategies (Max-CQI, proportional fair, latency-aware).
-  \item \textbf{GUI}: MATLAB-style map, packing panel, and trim-loss trend charts.
+  \item A \textbf{unified timestep engine} with fixed-seed determinism, bundled vehicular routes, and per-step resource service block (RSB) generation.
+  \item \textbf{In-process 2DRBP packers} (Guillotine, Shelf, MaxRects) with trim-loss reporting and density sweeps over vehicle counts $\{1,2,5,10,50\}$.
+  \item A \textbf{dual-path architecture}: interactive \texttt{sim\_engine} for teaching and prototyping, plus YAML-driven research scenarios (Boston, San Francisco, RTP presets; dual-band channel; Max-CQI, proportional-fair, latency-aware scheduling).
+  \item \textbf{Self-contained distribution}: \texttt{pip install -e ".[dev,gui]"} on macOS, Windows, and Linux; optional vendored C++ rectangle-bin sources for parity checks without a mandatory external executable.
+  \item \textbf{ZIP session export} (\texttt{manifest.json}, CSV, \texttt{session.npz}) for spreadsheets, notebooks, and third-party analysis tools.
 \end{itemize}
 
-\section{Modeling Assumptions}
-Channel behavior uses simplified 3GPP-inspired path loss and geometric blockage.
-Scheduler/packing uses in-process Python algorithms (Guillotine, Shelf, MaxRects) rather than the original C++ rectangle-bin executable.
-Validation and density-sweep statistics are reproducible from fixed seeds with documented caveats.
+\section{Simulator Architecture}
+The default engine maintains a \texttt{SimSession} keyed by vehicle count and random seed.
+Each \texttt{step()} advances mobility along precomputed routes, updates LoS probability along polylines, assigns RSB dimensions (stochastic per step so trim loss varies even at low vehicle counts), and invokes the selected packing algorithm.
+Snapshots feed the GUI and headless CLIs alike, ensuring identical numerics whether the user runs \texttt{--gui}, \texttt{--config}, or \texttt{--batch}.
+
+The research path loads \texttt{scenario\_*.yaml} files through a schema-validated configuration layer.
+Phases (warm-up, data collection) gate KPI logging; the channel module applies geometric blockage and optional codebook versus ideal beamforming modes at 28 and 39\,GHz.
+Both paths share validation scripts that emit JSON reports under \texttt{artifacts/validation/}.
+
+\section{Mobility and Channel Models}
+\textbf{Mobility.} The GUI path uses OSM-style bundled routes with configurable vehicle counts (up to 50 in the default scenario).
+The research path adds open-license city presets with rectangular extents and synthetic lane grids or CSV map-matched traces.
+
+\textbf{Channel.} Route-based LoS probability drives beam coloring on the aerial map.
+The extended channel model combines 3GPP-inspired path loss with geometric LOS/NLOS classification, dual-band carrier frequencies, and a switchable beam mode (\texttt{codebook} vs.\ \texttt{ideal}) for sensitivity analysis.
+These abstractions trade full TR~38.901 cluster models for transparency and fast iteration---appropriate for link-layer allocation studies rather than PHY waveform design.
+
+\section{Resource Allocation and 2DRBP}
+Vehicles request normalized resource blocks each timestep.
+The packer places axis-aligned rectangles into a fixed grid; unplaced demand contributes to \textbf{trim loss}, the primary comparative metric across vehicle densities.
+Three algorithms ship in-process: Guillotine splits, Shelf rows, and MaxRects free-rectangle management---each selectable at runtime without recompilation.
+
+Batch mode sweeps \texttt{nVehicle} over five standard counts with multiple trials per point, producing mean and standard deviation of trim loss for regression against published V2I allocation curves.
+Scheduler plugins on the research path allocate users before packing when studying fairness or latency policies.
 
 \section{Interactive Visualization}
-The desktop application reproduces the original two-panel layout.
-Figure~\ref{fig:map} shows the aerial map with vehicular routes, line-of-sight beams, and per-vehicle status coloring.
-Figure~\ref{fig:pack} shows the normalized resource-block packing view with trim-loss summary for the current timestep.
+The desktop application couples two synchronized views: an aerial map with routes, LoS beams, and per-vehicle status colors, and a packing panel with a trim-loss readout and session-persistent trend chart.
+Figure~\ref{fig:map} shows the map view during a ten-vehicle preview run; Figure~\ref{fig:pack} shows the corresponding 2DRBP placement and summary statistics.
 
 \begin{figure}[!t]
   \centering
   \includegraphics[width=\linewidth]{figures/fig_gui_map.png}
-  \caption{Figure~1 style view: aerial map, active routes, LoS beams, and vehicle packing status.}
+  \caption{Aerial map: vehicular routes, LoS beams, and packing-status coloring for active users.}
   \label{fig:map}
 \end{figure}
 
 \begin{figure}[!t]
   \centering
   \includegraphics[width=\linewidth]{figures/fig_gui_packing.png}
-  \caption{Figure~2 style view: 2DRBP packing of resource service blocks and trim-loss readout.}
+  \caption{Resource-block packing grid with per-step trim-loss summary.}
   \label{fig:pack}
 \end{figure}
 
-\section{Reproducibility}
-Artifacts are generated via \texttt{python scripts/generate\_readme\_assets.py} and
-\texttt{bash scripts/build\_paper.sh}.
-Fixed seeds yield deterministic simulation outputs and session export bundles.
+\subsection{Research Extensions}
+City-preset demos (\texttt{scripts/demo\_city\_presets.py}) exercise the legacy stack independently of the GUI routes.
+Researchers can mix presets, beam modes, and schedulers in one YAML file while the desktop app remains the fastest on-ramp for 2DRBP visualization.
+
+\section{Reproducibility and Session Export}
+Fixed seeds yield bit-stable timestep sequences.
+\texttt{python scripts/generate\_readme\_assets.py} renders figure previews; \texttt{bash scripts/build\_paper.sh} rebuilds this document.
+Completed GUI runs export a ZIP archive containing structured metadata, per-step trim-loss CSV (Excel-friendly), JSONL event logs, and \texttt{session.npz} reloadable via \texttt{load\_workspace\_npz()}.
+CI validates packing parity (including Linux-built native checks) and regenerates the PDF on \texttt{paper/} changes.
 
 \section{Conclusion}
-The Python simulator provides a research-grade, extensible foundation for mmWave V2I link-layer experimentation without MATLAB licensing constraints.
-The desktop release pairs MATLAB-style 2D visualization with ZIP session export; city presets and dual-band abstractions support comparative studies documented in the repository.
+The simulator is a self-contained mmWave V2I link-layer testbed: deep enough for allocation and mobility studies, yet installable in minutes for labs and independent projects.
+By unifying visualization, batch sweeps, dual-band research hooks, and portable session artifacts, it lowers the cost of credible, repeatable V2I experiments without tying results to a single vendor toolchain.
 
 \section*{Acknowledgment}
-This Python port is inspired by the original mmWave V2I MATLAB simulator (MathWorks File Exchange 84948).
+Earlier open releases of mmWave V2I simulation (MathWorks File Exchange 84948) informed the problem formulation and 2DRBP metrics used here.
 
 \begin{thebibliography}{1}
 \bibitem{subramanian2018}

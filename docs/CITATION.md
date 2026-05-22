@@ -8,6 +8,8 @@ Use these entries when referencing this project in papers, theses, or reports.
 
 Open-source technical report and software (not a peer-reviewed conference/journal publication). Cite the report for the simulator design and experiments, and the software entry for the code repository.
 
+**Author:** Ramanathan Subramanian (subramanian.r@northeastern.edu)
+
 ## Software repository
 
 - **Name:** mmwave-v2i-sim  
@@ -20,7 +22,7 @@ Open-source technical report and software (not a peer-reviewed conference/journa
 ```bibtex
 @misc{subramanian2026mmwave_sim,
   title        = {A Modular Python Simulator for mmWave Vehicle-to-Infrastructure Link-Layer Research},
-  author       = {Subramanian, Ram and {mmWave V2I Simulator Contributors}},
+  author       = {Subramanian, Ramanathan},
   year         = {2026},
   howpublished = {Open-source software and technical report},
   url          = {https://github.com/linux-ram/mmwave-v2i-sim},
@@ -33,7 +35,7 @@ Open-source technical report and software (not a peer-reviewed conference/journa
 ```bibtex
 @software{mmwave_v2i_sim,
   title     = {mmwave-v2i-sim: mmWave V2I link-layer simulator},
-  author    = {Subramanian, Ram},
+  author    = {Subramanian, Ramanathan},
   year      = {2026},
   url       = {https://github.com/linux-ram/mmwave-v2i-sim},
   version   = {0.2.0},
@@ -46,17 +48,17 @@ Open-source technical report and software (not a peer-reviewed conference/journa
 ```bibtex
 @misc{subramanian2019matlab_mmwave,
   title        = {Link Layer Simulator for mmWave V2I Network},
-  author       = {Subramanian, Ram},
+  author       = {Subramanian, Ramanathan},
   year         = {2019},
   howpublished = {MathWorks File Exchange},
   url          = {https://www.mathworks.com/matlabcentral/fileexchange/84948},
-  note         = {File Exchange ID 84948; predecessor to this Python port.}
+  note         = {File Exchange ID 84948; related prior release.}
 }
 ```
 
 ## In-text examples (APA-style)
 
-> Subramanian (2026) released an open-source Python simulator for mmWave vehicle-to-infrastructure link-layer research (mmwave-v2i-sim, v0.2.0).
+> Subramanian (2026) released an open-source mmWave vehicle-to-infrastructure link-layer simulator (mmwave-v2i-sim, v0.2.0).
 
 > We extend the 2DRBP packing workflow of the mmWave V2I simulator (Subramanian, 2026; see also Subramanian, 2019).
 

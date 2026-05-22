@@ -6,7 +6,7 @@ message: >-
 type: software
 authors:
   - family-names: Subramanian
-    given-names: Ram
+    given-names: Ramanathan
 repository-code: https://github.com/linux-ram/mmwave-v2i-sim
 url: https://github.com/linux-ram/mmwave-v2i-sim
 license: MIT
@@ -24,7 +24,7 @@ preferred-citation:
   title: A Modular Python Simulator for mmWave Vehicle-to-Infrastructure Link-Layer Research
   authors:
     - family-names: Subramanian
-      given-names: Ram
+      given-names: Ramanathan
   year: 2026
   url: https://github.com/linux-ram/mmwave-v2i-sim
   notes: Open-source technical report and software; not peer-reviewed.

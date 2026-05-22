@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "mmwave-v2i-sim"
 version = "0.1.0"
-description = "Modular and reproducible mmWave V2I simulator in Python"
+description = "mmWave V2I link-layer simulator in Python"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
