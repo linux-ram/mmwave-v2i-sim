@@ -12,3 +12,9 @@ artifacts/
 !artifacts/validation/**
 !artifacts/city_preset_summary.json
 .matplotlib_cache/
+.DS_Store
+vendor/RectangleBinPack/2drbp_parity
+vendor/RectangleBinPack/2drbp_maxrects
+vendor/RectangleBinPack/2drbp_ordered
+vendor/RectangleBinPack/2drbp_seq
+vendor/RectangleBinPack/2drbp_test

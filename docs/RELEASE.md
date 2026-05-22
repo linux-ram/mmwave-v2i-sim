@@ -4,40 +4,20 @@
 
 1. `pytest` passes
 2. `python scripts/generate_validation_report.py`
-3. `python scripts/bench_scale.py` within expected budgets (optional)
-4. `bash scripts/demo.sh`
-5. Review `docs/assumptions_limitations.md`
-6. Review `docs/open_data_sources.md` (no unlicensed assets bundled)
-7. Review [docs/FILE_EXCHANGE_CHECKLIST.md](FILE_EXCHANGE_CHECKLIST.md)
+3. `bash scripts/demo.sh` (builds vendor `2drbp_parity` on Linux/macOS)
+4. Review [docs/assumptions_limitations.md](assumptions_limitations.md)
 
-## GitHub publish (linux-ram/mmwave-v2i-sim)
-
-Prerequisites: [GitHub CLI](https://cli.github.com/) (`gh auth login`) and write access to the `linux-ram` org.
+## Tag a release (v0.2+)
 
 ```bash
-cd /path/to/mmwave-v2i-sim
-gh repo create linux-ram/mmwave-v2i-sim \
-  --public \
-  --source=. \
-  --remote=origin \
-  --description "mmWave V2I link-layer simulator in Python" \
-  --push
+# bump version in pyproject.toml and src/mmwave_v2i_sim/__init__.py
+pytest
+git tag -a v0.2.0 -m "v0.2.0: short description"
+git push origin v0.2.0
+gh release create v0.2.0 --title "v0.2.0" --notes-file docs/RELEASE_NOTES_v0.2.md --latest
 ```
 
-If the repo already exists:
-
-```bash
-git remote add origin git@github.com:linux-ram/mmwave-v2i-sim.git
-git push -u origin main
-```
-
-## Tag v0.1.0
-
-```bash
-git tag -a v0.1.0 -m "Initial public release: MATLAB-parity GUI and sim_engine"
-git push origin v0.1.0
-gh release create v0.1.0 --title "v0.1.0" --notes-file docs/RELEASE_NOTES_v0.1.md
-```
+Historical notes: [RELEASE_NOTES_v0.1.md](RELEASE_NOTES_v0.1.md), [RELEASE_NOTES_v0.2.md](RELEASE_NOTES_v0.2.md).
 
 ## Desktop bundle (optional)
 
@@ -46,9 +26,10 @@ pip install pyinstaller
 pyinstaller packaging/mmwave_gui.spec
 ```
 
-## MathWorks File Exchange
+On macOS, extend the spec with a `BUNDLE` target for a double-click `.app`.
 
-- Upload repository or release zip
-- Include README, LICENSE, USER_GUIDE
-- Link to original MATLAB entry: File Exchange 84948
-- Note Python 3.11+ requirement and PySide6/matplotlib for GUI
+## MathWorks File Exchange (optional)
+
+- Upload release zip with README, LICENSE, USER_GUIDE
+- Link File Exchange [84948](https://www.mathworks.com/matlabcentral/fileexchange/84948)
+- Python 3.11+, PySide6/matplotlib for GUI

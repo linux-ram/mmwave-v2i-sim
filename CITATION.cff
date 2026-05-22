@@ -33,7 +33,7 @@ references:
     title: Link Layer Simulator for mmWave V2I Network (MATLAB)
     authors:
       - family-names: Subramanian
-        given-names: Ram
+        given-names: Ramanathan
     year: 2019
     notes: MathWorks File Exchange 84948
     repository-code: https://github.com/linux-ram/mmWave-V2I-2DRBP

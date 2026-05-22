@@ -159,8 +159,8 @@ Regression gate: `tests/test_scale.py` (200-vehicle profile, 30 steps under 30 s
 
 ## Package structure
 
-All simulation logic lives in `src/mmwave_v2i_sim/sim_engine/`. The old `matlab_port` package
-is a deprecated compatibility shim that re-exports from `sim_engine`.
+- **`sim_engine/`** — default GUI and headless MATLAB-parity simulation
+- **`core/`, `channel/`, `mobility/`, `scheduling/`** — YAML-driven research path (see [CITY_PRESETS.md](CITY_PRESETS.md))
 
 ## How to cite this work
 

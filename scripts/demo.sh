@@ -7,6 +7,9 @@ if command -v c++ >/dev/null 2>&1; then
   c++ -std=c++17 -O2 vendor/RectangleBinPack/2drbp_parity.cpp \
     vendor/RectangleBinPack/GuillotineBinPack.cpp vendor/RectangleBinPack/Rect.cpp \
     -o vendor/RectangleBinPack/2drbp_parity || true
+  c++ -std=c++17 -O2 vendor/RectangleBinPack/2drbp_maxrects.cpp \
+    vendor/RectangleBinPack/GuillotineBinPack.cpp vendor/RectangleBinPack/Rect.cpp \
+    -o vendor/RectangleBinPack/2drbp_maxrects || true
 fi
 echo "== Tests =="
 python -m pytest -q

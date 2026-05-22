@@ -1,5 +1,3 @@
-"""Desktop UI package."""
+"""Desktop UI package (PySide6 application in ``app.py``)."""
 
-from mmwave_v2i_sim.ui.viewmodel import build_kpi_rows
-
-__all__ = ["build_kpi_rows"]
+__all__: list[str] = []

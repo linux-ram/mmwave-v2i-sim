@@ -38,48 +38,10 @@ def _save_sim_previews() -> None:
     plt.close(fig_pack)
 
 
-def _save_city_preset_figure() -> None:
-    from mmwave_v2i_sim.mobility.city_presets import CITY_PRESETS
-
-    fig, ax = plt.subplots(figsize=(7, 3.5))
-    colors = ["#4D96FF", "#FF6B6B", "#6BCB77"]
-    for (key, preset), color in zip(CITY_PRESETS.items(), colors):
-        rect = plt.Rectangle(
-            (0, 0),
-            preset.length_m / 100.0,
-            preset.width_m / 100.0,
-            fill=False,
-            edgecolor=color,
-            linewidth=2,
-            label=f"{preset.city_name} ({preset.length_m:.0f}×{preset.width_m:.0f} m)",
-        )
-        ax.add_patch(rect)
-        ax.text(
-            preset.length_m / 200.0,
-            preset.width_m / 100.0 + 0.3,
-            preset.city_name,
-            ha="center",
-            fontsize=9,
-            color=color,
-        )
-    ax.set_xlim(-0.5, 20)
-    ax.set_ylim(-0.5, 14)
-    ax.set_aspect("equal")
-    ax.set_xlabel("Relative extent (×100 m)")
-    ax.set_title("Open-license city presets (research path)")
-    ax.legend(loc="upper right", fontsize=8)
-    ax.grid(True, alpha=0.25)
-    fig.tight_layout()
-    fig.savefig(OUT / "city_presets.png", dpi=150)
-    plt.close(fig)
-
-
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     _save_sim_previews()
     print(f"Wrote {OUT / 'preview_map.png'} and preview_packing.png")
-    _save_city_preset_figure()
-    print(f"Wrote {OUT / 'city_presets.png'}")
 
 
 if __name__ == "__main__":
