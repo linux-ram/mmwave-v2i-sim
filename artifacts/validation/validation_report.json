@@ -1,0 +1,115 @@
+{
+  "caveats": [
+    "v0.1 release gates on sim_engine checks; legacy block is informational.",
+    "Original MATLAB repo: https://github.com/linux-ram/mmWave-V2I-2DRBP"
+  ],
+  "legacy": {
+    "caveats": [
+      "Uses configs/scenario_legacy_research.yaml research engine.",
+      "trim_loss_matlab_proxy is an illustrative trend, not File Exchange output."
+    ],
+    "checks": {
+      "trim_loss_in_valid_range": true,
+      "trim_loss_trend_monotonic_soft": false
+    },
+    "comparison": [
+      {
+        "delta_vs_proxy": 0.6368888888888888,
+        "los_ratio": 0.6666666666666666,
+        "trim_loss_matlab_proxy": 0.152,
+        "trim_loss_python": 0.7888888888888889,
+        "utilization": 0.2111111111111111,
+        "vehicles": 1
+      },
+      {
+        "delta_vs_proxy": 0.3633333333333333,
+        "los_ratio": 1.0,
+        "trim_loss_matlab_proxy": 0.166,
+        "trim_loss_python": 0.5293333333333333,
+        "utilization": 0.4706666666666666,
+        "vehicles": 2
+      },
+      {
+        "delta_vs_proxy": -0.08399999999999998,
+        "los_ratio": 0.5955555555555555,
+        "trim_loss_matlab_proxy": 0.184,
+        "trim_loss_python": 0.10000000000000002,
+        "utilization": 0.9,
+        "vehicles": 5
+      },
+      {
+        "delta_vs_proxy": -0.11733333333333332,
+        "los_ratio": 0.8000000000000002,
+        "trim_loss_matlab_proxy": 0.206,
+        "trim_loss_python": 0.08866666666666667,
+        "utilization": 0.9113333333333333,
+        "vehicles": 10
+      },
+      {
+        "delta_vs_proxy": -0.25333333333333335,
+        "los_ratio": 0.7577777777777778,
+        "trim_loss_matlab_proxy": 0.29800000000000004,
+        "trim_loss_python": 0.04466666666666668,
+        "utilization": 0.9553333333333335,
+        "vehicles": 50
+      }
+    ],
+    "config_fingerprint_fields": {
+      "scheduler": "max_cqi",
+      "seed": 12345
+    },
+    "engine": "legacy_core"
+  },
+  "sim_engine": {
+    "caveats": [
+      "Primary validation path for v0.1 release.",
+      "Matches GUI density options and `cli --batch`.",
+      "Trim loss may decrease with vehicle count (differs from illustrative MATLAB proxy).",
+      "MATLAB numeric parity requires side-by-side runs of the original repo."
+    ],
+    "checks": {
+      "nonzero_trim_at_n50": true,
+      "trim_loss_in_valid_range": true,
+      "trim_loss_varies_with_density": true
+    },
+    "comparison": [
+      {
+        "trim_loss_mean": 0.7617464718686836,
+        "trim_loss_std": 0.015884535201981197,
+        "vehicles": 1
+      },
+      {
+        "trim_loss_mean": 0.7344407667661624,
+        "trim_loss_std": 0.016429207482259157,
+        "vehicles": 2
+      },
+      {
+        "trim_loss_mean": 0.5313539856806163,
+        "trim_loss_std": 0.020107247275566134,
+        "vehicles": 5
+      },
+      {
+        "trim_loss_mean": 0.4638803600024313,
+        "trim_loss_std": 0.007058491125088872,
+        "vehicles": 10
+      },
+      {
+        "trim_loss_mean": 0.2721042178650644,
+        "trim_loss_std": 0.004345929789357102,
+        "vehicles": 50
+      }
+    ],
+    "engine": "sim_engine",
+    "metrics": {
+      "trim_loss_spread": 0.4896422540036192
+    },
+    "num_trials": 3,
+    "seed": 12345
+  },
+  "summary": {
+    "all_checks_pass": true,
+    "legacy_checks_pass": false,
+    "primary_engine": "sim_engine",
+    "sim_engine_checks_pass": true
+  }
+}

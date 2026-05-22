@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+title: mmwave-v2i-sim
+message: >-
+  If you use this software, please cite it using the metadata from this file.
+type: software
+authors:
+  - family-names: Subramanian
+    given-names: Ram
+repository-code: https://github.com/linux-ram/mmwave-v2i-sim
+url: https://github.com/linux-ram/mmwave-v2i-sim
+license: MIT
+version: 0.1.0
+keywords:
+  - mmwave
+  - v2i
+  - 2drbp
+  - link-layer
+  - simulator
+references:
+  - type: software
+    title: Link Layer Simulator for mmWave V2I Network (MATLAB)
+    authors:
+      - family-names: Subramanian
+        given-names: Ram
+    year: 2019
+    notes: MathWorks File Exchange 84948
+    repository-code: https://github.com/linux-ram/mmWave-V2I-2DRBP

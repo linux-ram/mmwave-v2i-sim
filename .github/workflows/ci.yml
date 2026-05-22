@@ -12,6 +12,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - run: pip install -r requirements-lock.txt
       - run: pip install -e ".[dev]"
       - run: pytest -q
       - run: python scripts/generate_validation_report.py
+      - run: test -f artifacts/validation/validation_report.json
