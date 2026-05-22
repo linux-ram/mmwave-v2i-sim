@@ -20,7 +20,7 @@ gh repo create linux-ram/mmwave-v2i-sim \
   --public \
   --source=. \
   --remote=origin \
-  --description "Python desktop port of the mmWave V2I 2DRBP link-layer simulator" \
+  --description "mmWave V2I link-layer simulator in Python" \
   --push
 ```
 
