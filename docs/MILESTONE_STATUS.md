@@ -6,7 +6,7 @@ This table tracks the ten program milestones (`m0`–`m9`) against the current c
 | ID | Milestone | v0.1 status | Notes |
 |----|-----------|-------------|-------|
 | m0 | Baseline & reproducibility | **Done** | Scaffold, CI, `requirements-lock.txt` |
-| m1 | Core simulation engine | **Partial** | Primary: `sim_engine` + `.npz` export; legacy: `core/` protocol engine |
+| m1 | Core simulation engine | **Partial** | Primary: `sim_engine` + ZIP session export; legacy: `core/` protocol engine |
 | m2 | Mobility & city scene | **Partial** | Bundled/OSM Boston routes; SFO/RTP presets in legacy `mobility/` only |
 | m3 | Channel, LOS, beam | **Partial** | Route LoS in `sim_engine`; geometric channel in legacy `channel/` |
 | m4 | Scheduler / packing | **Done** (sim_engine) | Guillotine, Shelf, MaxRects; legacy schedulers in `scheduling/` |

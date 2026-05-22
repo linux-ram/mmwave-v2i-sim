@@ -11,7 +11,7 @@ from mmwave_v2i_sim.sim_engine.engine import SimSession, StepSnapshot
 from mmwave_v2i_sim.sim_engine.packing import ALGORITHMS
 from mmwave_v2i_sim.sim_engine.session_export import (
     build_workspace,
-    save_workspace_npz,
+    save_workspace_zip,
     snapshot_to_dict,
 )
 from mmwave_v2i_sim.sim_engine.trim_plot import (
@@ -570,14 +570,14 @@ def run_desktop_app(config: SimConfig) -> None:
             path_str, _ = QFileDialog.getSaveFileName(
                 self,
                 "Download simulation data",
-                "mmwave_sim_session.npz",
-                "NumPy archive (*.npz)",
+                "mmwave_sim_session.zip",
+                "ZIP archive (*.zip)",
             )
             if not path_str:
                 return
             path = Path(path_str)
-            if path.suffix.lower() != ".npz":
-                path = path.with_suffix(".npz")
+            if path.suffix.lower() != ".zip":
+                path = path.with_suffix(".zip")
             workspace = build_workspace(
                 n_vehicle=self._n_vehicle,
                 packing_algorithm=self._packing_algo,
@@ -591,7 +591,7 @@ def run_desktop_app(config: SimConfig) -> None:
                 if self._session.trim_history
                 else None,
             )
-            save_workspace_npz(path, workspace)
+            save_workspace_zip(path, workspace)
 
         def _refresh_all(self) -> None:
             draw_figure1_map(

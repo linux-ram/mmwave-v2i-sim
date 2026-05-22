@@ -3,7 +3,7 @@
 ## Highlights
 
 - **MATLAB-parity desktop simulator** (`sim_engine`): aerial map, LoS beams, 2DRBP packing (Guillotine / Shelf / MaxRects).
-- **PySide6 GUI**: Figure 1 + Figure 2 layout, playback controls, batch runs (1/5/20/50), session `.npz` export.
+- **PySide6 GUI**: Figure 1 + Figure 2 layout, playback controls, batch runs (1/5/20/50), session `.zip` export (JSON/CSV + embedded `session.npz`).
 - **Trim-loss trend plot** with multi-run statistics.
 - Optional OSM road-snapped routes (Boston Seaport).
 - Legacy research engine (`core/`) for protocol-phase experiments.

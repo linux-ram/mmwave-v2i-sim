@@ -59,7 +59,23 @@ the sim uses OSM road-snapped routes cached under `assets/`; otherwise the bundl
 | **LoS threshold** | P(LoS) cutoff in steps of 0.1 (default 0.5); vehicles with P(LoS) ≥ threshold join the packing |
 | **Route display** | On (full path visible) or Off (hide routes) |
 
-**SESSION DATA** panel (sibling to SIMULATION PARAMETERS): **Download simulation data** saves a `.npz` archive (disabled until at least one run completes) with parameters, trim histories, and per-step snapshots from all runs in the session. Load in Python with `data = np.load("file.npz", allow_pickle=True)["workspace"].item()`.
+**SESSION DATA** panel (sibling to SIMULATION PARAMETERS): **Download simulation data** saves a `.zip` bundle (disabled until at least one run completes) containing:
+
+- `manifest.json` — session parameters
+- `trim_loss_steps.csv` — per-step trim loss (Excel/MATLAB friendly)
+- `trim_series.json` — aggregated trim histories
+- `runs/run_NNN/steps.jsonl` — one JSON line per timestep
+- `session.npz` — full Python workspace inside the zip
+
+Quick load in Python:
+
+```python
+from pathlib import Path
+from mmwave_v2i_sim.sim_engine.session_export import load_workspace_npz
+data = load_workspace_npz(Path("mmwave_sim_session.zip"))
+```
+
+Open `trim_loss_steps.csv` in Excel or MATLAB `readtable`.
 
 Beam wedges use a **fixed 15°** span; orientation follows per-vehicle geometry.
 
