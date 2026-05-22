@@ -39,12 +39,6 @@ git push origin v0.1.0
 gh release create v0.1.0 --title "v0.1.0" --notes-file docs/RELEASE_NOTES_v0.1.md
 ```
 
-## Cross-link MATLAB repo
-
-On [linux-ram/mmWave-V2I-2DRBP](https://github.com/linux-ram/mmWave-V2I-2DRBP), add to README:
-
-> **Python port:** [mmwave-v2i-sim](https://github.com/linux-ram/mmwave-v2i-sim) — cross-platform GUI, Guillotine/Shelf/MaxRects packing, session export.
-
 ## Desktop bundle (optional)
 
 ```bash

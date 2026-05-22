@@ -5,7 +5,6 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 REPO="linux-ram/mmwave-v2i-sim"
-MATLAB_REPO="linux-ram/mmWave-V2I-2DRBP"
 
 if ! command -v gh >/dev/null 2>&1; then
   echo "Install GitHub CLI: brew install gh && gh auth login"
@@ -44,34 +43,6 @@ git push origin v0.1.0
 echo "== GitHub Release =="
 gh release create v0.1.0 --title "v0.1.0" --notes-file docs/RELEASE_NOTES_v0.1.md -R "${REPO}" || \
   gh release edit v0.1.0 --notes-file docs/RELEASE_NOTES_v0.1.md -R "${REPO}"
-
-echo "== Cross-link MATLAB repo README =="
-MATLAB_README=$(gh api "repos/${MATLAB_REPO}/readme" --jq .content 2>/dev/null | base64 -d 2>/dev/null || true)
-if [[ -n "${MATLAB_README}" ]] && ! grep -q "mmwave-v2i-sim" <<<"${MATLAB_README}"; then
-  PATCH="# Python port
-
-**[mmwave-v2i-sim](https://github.com/linux-ram/mmwave-v2i-sim)** — cross-platform GUI, Guillotine/Shelf/MaxRects packing, session ZIP export.
-
----
-
-${MATLAB_README}"
-  SHA=$(gh api "repos/${MATLAB_REPO}/contents/README.md" --jq .sha 2>/dev/null || true)
-  if [[ -n "${SHA}" ]]; then
-    B64=$(printf '%s' "${PATCH}" | base64 | tr -d '\n')
-    if gh api "repos/${MATLAB_REPO}/contents/README.md" -X PUT \
-      -f message="Link Python port repository" \
-      -f content="${B64}" \
-      -f sha="${SHA}" >/dev/null 2>&1; then
-      echo "Updated MATLAB README"
-    else
-      echo "Could not auto-update MATLAB README — add link manually (see docs/RELEASE.md)"
-    fi
-  else
-    echo "Could not read MATLAB README SHA — add link manually (see docs/RELEASE.md)"
-  fi
-else
-  echo "Skip MATLAB README (already linked or no API access)"
-fi
 
 echo "== Ensure milestone labels =="
 _ensure_label "milestone:m5" "1D76DB"
